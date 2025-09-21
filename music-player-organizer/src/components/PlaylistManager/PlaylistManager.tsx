@@ -1,9 +1,8 @@
-import React from "react";
 import "./PlaylistManager.css";
-import type { Playlist } from "../Playlist/Playlist";
+import type { Playlist } from "../types/PlaylistData";
 
 
-const PlaylistManager: React.FC = () => {
+export function PlaylistManager() {
   const playlists: Playlist[] = [
     { id: 1, name: "Your Station", songCount: 215 },
     { id: 2, name: "Hip-Hop Workout", songCount: 212 },
@@ -17,14 +16,12 @@ const PlaylistManager: React.FC = () => {
         {playlists.map((playlist) => (
           <li key={playlist.id} className="playlist-item">
             <span className="playlist-name">{playlist.name}</span>
-            <span className="playlist-count">
-              {playlist.songCount} songs
-            </span>
+            <span className="playlist-count">{playlist.songCount} songs</span>
           </li>
         ))}
       </ul>
     </section>
   );
-};
+}
 
 export default PlaylistManager;

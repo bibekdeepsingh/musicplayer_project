@@ -1,0 +1,21 @@
+.app-header {
+  background-color: #636464; 
+  color: #ffffff;
+  padding: 1.5rem 2rem;
+  text-align: left;          
+  width: 100vw;              
+  box-sizing: border-box;   
+  margin: 0;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  text-align: center;          
+}
+
+.app-header p {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  text-align: center;         
+}
