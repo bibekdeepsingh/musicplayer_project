@@ -1,5 +1,7 @@
 export type Subscription = {
   id: number;
-  name: string;
-  plan: string;
+  service: string;
+  planType: string;
+  price: number;
 };
+
