@@ -1,5 +1,10 @@
+/* 
+Colour Palette:
+- Navy Blue (Header): #1a2b50
+- White (Text): #ffffff
+*/
 .app-header {
-  background-color: #636464; 
+  background-color: #1a2b50; 
   color: #ffffff;
   padding: 1.5rem 2rem;
   text-align: left;          

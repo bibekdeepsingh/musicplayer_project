@@ -3,7 +3,7 @@ body, html {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  background: #f8f5f2; 
+  background: #d9e8f4; 
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -15,7 +15,7 @@ body, html {
 }
 
 .subscription-manager {
-  background-color: #f8f5f2;  
+  background-color: #d9e8f4;  
   color: #2b2b2b;             
   padding: 2rem 0;
   width: 100vw;
@@ -29,7 +29,7 @@ body, html {
 .subscription-manager h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  color: #6b6b6b;  
+  color: #1a2b50;  
   text-align: center;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -52,10 +52,10 @@ body, html {
   padding: 1.2rem 1.5rem;
   margin-bottom: 1rem;
   border-radius: 10px;
-  background-color: #fffdfb; 
+  background-color: #bed1e5; 
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
   font-size: 1.1rem;
-  border: 1px solid #e4e0db; 
+  border: 1px solid #8aa2b8; 
 }
 
 .subscription-name {
@@ -71,6 +71,6 @@ body, html {
 
 .subscription-price {
   font-weight: 500;
-  color: #444444;
+  color: #1a2b50;
   font-size: 1.1rem;
 }
