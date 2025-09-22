@@ -1,5 +1,5 @@
 import "./SubscriptionManager.css";
-import type { Subscription } from "../data/SubscriptionData";
+import type { Subscription } from "../types/SubscriptionData";
 
 const subscriptions: Subscription[] = [
   { id: 101, service: "Spotify Premium", planType: "Monthly", price: 9.99 },
