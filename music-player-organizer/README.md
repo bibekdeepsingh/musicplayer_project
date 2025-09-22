@@ -1,4 +1,4 @@
-# Music App Project (Assignment 1)
+# Music App Project 
 
 ## Team Member
 Bibekdeep Singh
