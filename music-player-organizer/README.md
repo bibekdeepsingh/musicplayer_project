@@ -17,3 +17,7 @@ It allows users to view and organize playlists, subscriptions in a clean and acc
 2. As a user, I want to view my active music subscriptions, so that I can manage my monthly services.
 3. As a user, I want the app to look clean and easy to use, so that I can enjoy interacting with it regularly.
 
+## Components
+
+Playlist Manager component was done by Bibekdeep Singh
+subscription Manager component was done by Smilepreet Kaur
