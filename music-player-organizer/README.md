@@ -1,4 +1,4 @@
-# Music App Project 
+## Music App Project 
 
 ## Team Member
 Bibekdeep Singh
