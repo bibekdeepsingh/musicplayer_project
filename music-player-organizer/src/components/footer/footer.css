@@ -1,0 +1,20 @@
+/* 
+Colour Palette:
+- Light Blue (Background): #99b6d5
+- Black (Text): #272727
+*/
+.app-footer {
+  background-color: #99b6d5;  
+  color: #272727;             
+    padding: 1rem 2rem;
+  text-align: center;          
+  font-size: 0.9rem;
+  border-top: 1px solid #e0e0e0; 
+  width: 100vw;
+  box-sizing: border-box;
+  margin-top: auto;          
+}
+
+.app-footer p {
+  margin: 0;
+}

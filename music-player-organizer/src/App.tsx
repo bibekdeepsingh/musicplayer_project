@@ -1,14 +1,13 @@
-import { Login } from "./components/login/Login";
 import './App.css'
+import { PlaylistManager } from './components/PlaylistManager/PlaylistManager'
+import SubscriptionManager from './components/SubscriptionManager/SubscriptionManager'
+import Header from './components/header/header'
+import Footer from './components/footer/footer'
 
 function App() {
-  return (
-    <>
-      <div>
-        <Login />
       </div>
     </>
   )
 }
-
+ 
 export default App
