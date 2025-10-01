@@ -1,3 +1,10 @@
+/*
+Colour palleteL:
+- Navy Blue (Heading): #1a2b50
+- Light Blue (Background): #d9e8f4
+- pastel Blue (Cloumns): #bed1ef
+- Black (text): #2b2b2b
+*/
 body, html {
   margin: 0;
   padding: 0;
@@ -14,7 +21,7 @@ body, html {
   padding: 0;
 }
  
-.subscription-manager {
+.login {
   background-color: #d9e8f4;  
   color: #2b2b2b;            
   padding: 2rem 0;
@@ -26,7 +33,7 @@ body, html {
   text-align: left;
 }
  
-.subscription-manager h2 {
+.login h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
   color: #1a2b50;  
@@ -35,13 +42,13 @@ body, html {
   letter-spacing: 0.5px;
 }
  
-.subscription-manager ul {
+.login {
   list-style: none;
   padding: 0;
   margin: 0;
 }
  
-.subscription-item {
+.login {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,18 +65,18 @@ body, html {
   border: 1px solid #8aa2b8;
 }
  
-.subscription-name {
+.login {
   font-weight: 600;
   font-size: 1.2rem;
 }
  
-.subscription-plan {
+.login {
   display: block;
   color: #7a7a7a;
   font-size: 1rem;
 }
 
-.subscription-price {
+.login {
   font-weight: 500;
   color: #1a2b50;
   font-size: 1.1rem;

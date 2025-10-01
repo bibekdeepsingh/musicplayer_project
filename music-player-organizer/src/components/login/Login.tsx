@@ -1,4 +1,5 @@
 import "./Login.css";
+import type { Login } from "../../data/Logindata"
 
 export function Login() {
   return (
@@ -6,17 +7,33 @@ export function Login() {
       <h2>Login</h2>
       <form className="login-form">
         <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
         </div>
 
-        <button type="submit" className="login-button">Login</button>
+        <button type="submit" className="login-button">
+          Login
+        </button>
       </form>
     </section>
   );
 }
+
+export default Login;
