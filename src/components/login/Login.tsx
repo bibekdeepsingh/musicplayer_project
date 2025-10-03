@@ -1,5 +1,5 @@
 import "./Login.css";
-import type { Login } from "../../data/Logindata"
+import type { Login } from "../types/Logindata"
 
 export function Login() {
   return (
