@@ -1,11 +1,6 @@
 import { useState } from "react";
 import "./PlaylistManager.css";
-
-export interface Playlist {
-  id: number;
-  name: string;
-  songCount: number;
-}
+import type { Playlist } from "../types/PlaylistData";
 
 export function PlaylistManager() {
   const [playlists, setPlaylists] = useState<Playlist[]>([
