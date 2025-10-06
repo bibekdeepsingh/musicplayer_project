@@ -1,39 +1,46 @@
+import { useState } from "react";
 import "./Login.css";
-import type { Login } from "../types/Logindata"
 
 export function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log("Login attempted:", { email, password });
+    alert(`Logged in as: ${email}`);
+  };
+
   return (
-    <section className="login-container">
+    <section className="login">
       <h2>Login</h2>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
-            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
-            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
             required
           />
         </div>
 
-        <button type="submit" className="login-button">
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
     </section>
   );
 }
-
-export default Login;

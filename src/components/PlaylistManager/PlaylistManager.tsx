@@ -1,11 +1,6 @@
 import { useState } from "react";
 import "./PlaylistManager.css";
-
-export interface Playlist {
-  id: number;
-  name: string;
-  songCount: number;
-}
+import type { Playlist } from "../types/PlaylistData";
 
 export function PlaylistManager() {
   const [playlists, setPlaylists] = useState<Playlist[]>([
@@ -48,7 +43,7 @@ export function PlaylistManager() {
           <li key={playlist.id} className="playlist-item">
             <span className="playlist-name">{playlist.name}</span>
             <span className="playlist-count">{playlist.songCount} songs</span>
-            <button onClick={() => removePlaylist(playlist.id)}>❌</button>
+            <button onClick={() => removePlaylist(playlist.id)}>Remove</button>
           </li>
         ))}
       </ul>

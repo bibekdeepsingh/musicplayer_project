@@ -4,11 +4,11 @@ Colour Palette:
 - White (Text): #ffffff
 */
 .app-header {
-  background-color: #1a2b50; 
+  background-color: #142d4c; 
   color: #ffffff;
   padding: 1.5rem 2rem;
   text-align: left;          
-  width: 100vw;              
+  width: 83vw;              
   box-sizing: border-box;   
   margin: 0;
 }

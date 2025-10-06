@@ -4,15 +4,15 @@ Colour Palette:
 - Black (Text): #272727
 */
 .app-footer {
-  background-color: #99b6d5;  
-  color: #272727;             
-    padding: 1rem 2rem;
+  background-color: #385170;  
+  color: #080808;             
+  padding: 1rem 2rem;
   text-align: center;          
   font-size: 0.9rem;
   border-top: 1px solid #e0e0e0; 
-  width: 100vw;
+  width: 85vw;
   box-sizing: border-box;
-  margin-top: auto;          
+  margin-top: 3px;          
 }
 
 .app-footer p {
