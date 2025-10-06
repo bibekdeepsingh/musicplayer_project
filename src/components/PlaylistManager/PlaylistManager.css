@@ -1,3 +1,13 @@
+/* 
+Colour Palette:
+- Navy Blue : #005fa3
+- Slate Blue (Buttons): #385170
+- Aqua Blue (Item BG): #bbe4e9
+- Light Gray (BG): #ececec
+- White: #ffffff
+- Gray Text: #333 / #777
+*/
+
 .playlist-manager {
   background-color: #ececec;
   padding: 2rem;

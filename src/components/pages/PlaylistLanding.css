@@ -1,3 +1,12 @@
+/* 
+Colour Palette:
+- Blue : #0077cc
+- Dark Blue (Hover): #005fa3
+- Light Gray (Background): #fafafa
+- White: #ffffff
+- Gray Text: #333 / #555
+*/
+
 .landing-container {
   display: flex;
   flex-direction: column;
