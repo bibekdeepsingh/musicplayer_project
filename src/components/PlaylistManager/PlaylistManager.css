@@ -1,5 +1,5 @@
 .playlist-manager {
-  background-color: #fafafa;
+  background-color: #ececec;
   padding: 2rem;
   border-radius: 8px;
   max-width: 600px;
@@ -32,7 +32,7 @@
 }
 
 .add-playlist button {
-  background-color: #0077cc;
+  background-color: #385170;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -59,7 +59,7 @@
   padding: 0.75rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 6px;
-  background-color: #f0f0f0;
+  background-color: #bbe4e9;
   transition: background 0.2s ease-in-out;
 }
 

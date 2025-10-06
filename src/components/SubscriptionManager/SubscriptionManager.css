@@ -1,5 +1,5 @@
 .subscription-manager {
-  background-color: #fafafa;
+  background-color: #ececec;
   padding: 2rem;
   border-radius: 10px;
   max-width: 600px;
@@ -28,13 +28,13 @@
   align-items: center;
   padding: 1rem 1.25rem;
   margin-bottom: 0.75rem;
-  background-color: #f0f0f0;
+  background-color: #bbe4e9;
   border-radius: 8px;
   transition: background-color 0.2s ease-in-out;
 }
 
 .subscription-item:hover {
-  background-color: #e5e5e5;
+  background-color: #bbe4e9;
 }
 
 .subscription-info {
@@ -59,7 +59,7 @@
 }
 
 .subscription-price {
-  color: #0077cc;
+  color: #142d4c;
   font-weight: 600;
   font-size: 1rem;
 }
@@ -79,4 +79,22 @@
   .subscription-details {
     text-align: left;
   }
+}
+
+.subscribe-btn {
+  display: block;
+  background-color: #38598b;
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 1rem auto;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.subscribe-btn:hover {
+  background-color: #38598b;
 }
