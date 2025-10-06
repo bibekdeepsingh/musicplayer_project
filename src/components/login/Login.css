@@ -1,3 +1,14 @@
+/* 
+Colour Palette:
+- Teal : #9fd3c7
+- Slate Blue (Button Hover/Focus): #385170
+- Light Gray (Background): #ececec
+- Blue Glow (Focus Outline): rgba(0, 119, 204, 0.4)
+- Gray Text: #333
+- White: #ffffff
+*/
+
+
 .login-container {
   background-color: #fafafa;
   max-width: 400px;
