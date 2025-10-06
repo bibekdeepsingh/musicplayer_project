@@ -1,5 +1,5 @@
 .login-container {
-  background-color: #fafafa;
+  background-color: #ececec;
   max-width: 400px;
   margin: 3rem auto;
   padding: 2rem 2.5rem;
@@ -44,13 +44,13 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #0077cc;
+  border-color: #385170;
   box-shadow: 0 0 4px rgba(0, 119, 204, 0.4);
 }
 
 .login-button {
-  background-color: #0077cc;
-  color: white;
+  background-color: #9fd3c7;
+  color: rgb(20, 20, 20);
   border: none;
   padding: 0.7rem 1rem;
   border-radius: 6px;
@@ -61,11 +61,11 @@
 }
 
 .login-button:hover {
-  background-color: #005fa3;
+  background-color: #385170;
 }
 
 .login-button:active {
-  background-color: #004b80;
+  background-color: #385170;
 }
 
 @media (max-width: 480px) {
