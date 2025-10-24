@@ -1,6 +1,6 @@
 import "./SubscriptionManager.css";
 import { useState } from "react";
-import type { Subscription } from "../types/SubscriptionData";
+import type { Subscription } from "../../types/SubscriptionData";
 
 export function SubscriptionManager() {
   const subscriptions: Subscription[] = [
