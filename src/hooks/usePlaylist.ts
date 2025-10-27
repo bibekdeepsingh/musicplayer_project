@@ -1,52 +1,50 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import type { Playlist } from "../types/PlaylistData";
-import { playlistService } from "../services/PlaylistService";
 
-export function usePlaylists() {
+const STORAGE_KEY = "playlists";
+
+export function usePlaylist() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const [loading, setLoading]   = useState(true);
-  const [error, setError]       = useState<string | null>(null);
 
-  const refresh = useCallback(async () => {
-    try {
-      setLoading(true);
-      setPlaylists(await playlistService.getAll());
-      setError(null);
-    } catch (e: any) {
-      setError(e?.message ?? "Failed to load playlists");
-    } finally {
-      setLoading(false);
+  // Load playlists from localStorage on mount
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      setPlaylists(JSON.parse(stored));
+    } else {
+      const defaults: Playlist[] = [
+        { id: 1, name: "Your Station", songCount: 215 },
+        { id: 2, name: "Hip-Hop Workout", songCount: 212 },
+        { id: 3, name: "Sad Hits", songCount: 140 },
+      ];
+      setPlaylists(defaults);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(defaults));
     }
   }, []);
 
-  useEffect(() => { void refresh(); }, [refresh]);
+  const save = (data: Playlist[]) => {
+    setPlaylists(data);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  };
 
-  const add = useCallback(async (name: string) => {
-    try {
-      await playlistService.create(name);
-      await refresh();
-    } catch (e: any) {
-      setError(e?.message ?? "Failed to create playlist");
-    }
-  }, [refresh]);
+  const add = (name: string) => {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    const newList = [
+      ...playlists,
+      { id: playlists.length + 1, name: trimmed, songCount: 0 },
+    ];
+    save(newList);
+  };
 
-  const remove = useCallback(async (id: number) => {
-    try {
-      await playlistService.remove(id);
-      await refresh();
-    } catch (e: any) {
-      setError(e?.message ?? "Failed to remove playlist");
-    }
-  }, [refresh]);
+  const remove = (id: number) => {
+    const newList = playlists.filter((p) => p.id !== id);
+    save(newList);
+  };
 
-  const rename = useCallback(async (id: number, newName: string) => {
-    try {
-      await playlistService.rename(id, newName);
-      await refresh();
-    } catch (e: any) {
-      setError(e?.message ?? "Failed to rename playlist");
-    }
-  }, [refresh]);
+  const clear = () => {
+    save([]);
+  };
 
-  return { playlists, loading, error, add, remove, rename, refresh };
+  return { playlists, add, remove, clear };
 }

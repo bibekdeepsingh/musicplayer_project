@@ -1,39 +1,34 @@
-import { PLAYLISTS_TESTDATA } from "../data/Playlistdata";
 import type { Playlist } from "../types/PlaylistData";
 
-let memory = [...PLAYLISTS_TESTDATA];
+const KEY = "playlists";
+const SEED: Playlist[] = [
+  { id: 1, name: "Your Station", songCount: 215 },
+  { id: 2, name: "Hip-Hop Workout", songCount: 212 },
+  { id: 3, name: "Sad Hits", songCount: 140 },
+];
 
-const delay = (ms = 150) => new Promise(res => setTimeout(res, ms));
+function read(): Playlist[] {
+  const raw = localStorage.getItem(KEY);
+  if (!raw) {
+    localStorage.setItem(KEY, JSON.stringify(SEED));
+    return SEED;
+  }
+  try { return JSON.parse(raw) as Playlist[]; } catch { return SEED; }
+}
+function write(data: Playlist[]) { localStorage.setItem(KEY, JSON.stringify(data)); }
 
-export const playlistRepository = {
-  async list(): Promise<Playlist[]> {
-    await delay();
-    return [...memory];
+export const playlistRepo = {
+  all(): Playlist[] { return read(); },
+  add(name: string): Playlist[] {
+    const data = read();
+    const next = { id: data.length ? Math.max(...data.map(p => p.id)) + 1 : 1, name: name.trim(), songCount: 0 };
+    const out = [...data, next];
+    write(out);
+    return out;
   },
-  async get(id: number): Promise<Playlist | undefined> {
-    await delay();
-    return memory.find(p => p.id === id);
-  },
-  async create(input: Pick<Playlist, "name">): Promise<Playlist> {
-    await delay();
-    const next: Playlist = {
-      id: memory.length ? Math.max(...memory.map(p => p.id)) + 1 : 1,
-      name: input.name,
-      songCount: 0,
-    };
-    memory = [...memory, next];
-    return next;
-  },
-  async update(id: number, patch: Partial<Pick<Playlist, "name" | "songCount">>): Promise<Playlist> {
-    await delay();
-    const idx = memory.findIndex(p => p.id === id);
-    if (idx === -1) throw new Error("Playlist not found");
-    const updated: Playlist = { ...memory[idx], ...patch,};
-    memory = [...memory.slice(0, idx), updated, ...memory.slice(idx + 1)];
-    return updated;
-  },
-  async remove(id: number): Promise<void> {
-    await delay();
-    memory = memory.filter(p => p.id !== id);
+  remove(id: number): Playlist[] {
+    const out = read().filter(p => p.id !== id);
+    write(out);
+    return out;
   }
 };
