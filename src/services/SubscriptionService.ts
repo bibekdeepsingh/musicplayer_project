@@ -1,6 +1,5 @@
 import { subscriptionRepo } from "../repo/SubscriptionRepository";
 
-// Mock async API (you can replace this with a real API later)
 export const subscriptionService = {
   async fetchAll() {
     return new Promise(resolve => {

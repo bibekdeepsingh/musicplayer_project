@@ -6,7 +6,6 @@ const STORAGE_KEY = "playlists";
 export function usePlaylist() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
 
-  // Load playlists from localStorage on mount
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {

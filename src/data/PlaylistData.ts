@@ -8,5 +8,4 @@ export const PLAYLISTS_TESTDATA = [
   { id: 7,  name: "Throwbacks",       songCount: 132 },
   { id: 8,  name: "Indie Blend",      songCount: 84 },
   { id: 9,  name: "Party Starters",   songCount: 65 },
-  { id: 10, name: "Instrumentals",    songCount: 44 }
 ];

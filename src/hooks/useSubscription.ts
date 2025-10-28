@@ -4,7 +4,6 @@ import { subscriptionRepo, type Subscription } from "../repo/SubscriptionReposit
 export function useSubscriptionManager() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 
-  // Load subscriptions once
   useEffect(() => {
     setSubscriptions(subscriptionRepo.all());
   }, []);

@@ -1,4 +1,4 @@
-import { songs } from "./testData";
+import { songs } from "../data/testData";
 import type { Song } from "../types/Song";
 
 export const SongRepository = {

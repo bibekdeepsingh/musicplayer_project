@@ -6,19 +6,19 @@ function NowPlaying() {
 
   return (
     <section className="now-playing">
-      <h2>🎵 Now Playing</h2>
+      <h2>Now Playing</h2>
 
       {currentSong ? (
         <>
           <div className="song-info">
             <p className="song-title"><strong>{currentSong.title}</strong></p>
             <p className="song-artist">{currentSong.artist}</p>
-            <p className="song-duration">⏱ {currentSong.duration}</p>
+            <p className="song-duration">{currentSong.duration}</p>
           </div>
 
           <div className="controls">
-            <button className="control-btn prev" onClick={playPrev}>⏮️ Prev</button>
-            <button className="control-btn next" onClick={playNext}>⏭️ Next</button>
+            <button className="control-btn prev" onClick={playPrev}>Prev</button>
+            <button className="control-btn next" onClick={playNext}>Next</button>
           </div>
         </>
       ) : (
