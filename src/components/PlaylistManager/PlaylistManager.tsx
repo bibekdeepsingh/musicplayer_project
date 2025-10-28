@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./PlaylistManager.css";
-import type { Playlist } from "../types/PlaylistData";
+import type { Playlist } from "../../types/PlaylistData";
 
 export function PlaylistManager() {
   const [playlists, setPlaylists] = useState<Playlist[]>([
