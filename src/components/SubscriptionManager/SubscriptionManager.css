@@ -1,3 +1,14 @@
+/* 
+Colour Palette:
+- Navy Blue: #1a2b50
+- Medium Blue (Buttons): #38598b
+- Aqua Blue (Item BG): #bbe4e9
+- Dark Blue (Text): #142d4c
+- Light Gray (BG): #ececec
+- White: #ffffff
+- Gray Text: #333 / #555
+*/
+
 .subscription-manager {
   background-color: #ececec;
   padding: 2rem;
