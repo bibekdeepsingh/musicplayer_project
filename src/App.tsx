@@ -7,7 +7,9 @@ import SubscriptionManager from "./components/SubscriptionManager/SubscriptionMa
 import { Login } from "./components/login/Login";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
- 
+import NowPlaying from "./components/NowPlaying/NowPlaying";
+
+
 function App() {
   return (
 <Router>
@@ -17,6 +19,7 @@ function App() {
 <nav className="main-nav">
 <Link to="/">Home</Link> |{" "}
 <Link to="/login">Login</Link> |{" "}
+<Link to="/NowPlaying">NowPlaying</Link>|{" "}
 <Link to="/subscriptions">Subscriptions</Link> |{" "}
 <Link to="/playlists">Playlists</Link>
 </nav>
@@ -25,6 +28,7 @@ function App() {
 <Routes>
 <Route path="/" element={<Landing />} />
 <Route path="/login" element={<Login />} />
+<Route path="/NowPlaying" element={<NowPlaying />} />
 <Route path="/subscriptions" element={<SubscriptionManager />} />
 <Route path="/playlists" element={<PlaylistManager />} />
 </Routes>
