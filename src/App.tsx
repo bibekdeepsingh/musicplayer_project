@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useState } from "react";
  
+// Components
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import { Landing } from "./components/pages/PlaylistLanding";
@@ -64,3 +65,4 @@ function App() {
 }
  
 export default App;
+ 

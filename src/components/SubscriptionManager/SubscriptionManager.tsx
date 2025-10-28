@@ -2,27 +2,27 @@ import "./SubscriptionManager.css";
 import { useState, useEffect } from "react";
 import type { Subscription } from "../../types/SubscriptionData";
 import { testSubscriptions } from "../../data/SubscriptionData";
-
+ 
 export function SubscriptionManager() {
   const [subs, setSubs] = useState<Subscription[]>([]);
-
+ 
   useEffect(() => {
     const saved = localStorage.getItem("subscriptions");
     setSubs(saved ? JSON.parse(saved) : testSubscriptions);
   }, []);
-
+ 
   const save = (data: Subscription[]) => {
     setSubs(data);
     localStorage.setItem("subscriptions", JSON.stringify(data));
   };
-
+ 
   const toggle = (id: string) => {
     const updated = subs.map((s) =>
       s.id === id ? { ...s, isActive: !s.isActive } : s
     );
     save(updated);
   };
-
+ 
   return (
     <section className="subscription-manager">
       <h2>My Subscriptions</h2>
@@ -53,5 +53,5 @@ export function SubscriptionManager() {
     </section>
   );
 }
-
+ 
 export default SubscriptionManager;
