@@ -1,26 +1,19 @@
-/* 🎨 Colour Palette:
-- Navy Blue: #1a2b50
-- Medium Blue: #38598b
-- Light Blue: #bbe4e9
-- Gray: #ececec
-*/
-
 .playlist-manager {
   background-color: #ececec;
   padding: 2rem;
-  border-radius: 10px;
-  max-width: 650px;
-  margin: 3rem auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
 
 .playlist-manager h2 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  text-align: center;
   color: #333;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 .add-playlist {
@@ -32,17 +25,17 @@
 
 .add-playlist input {
   flex: 1;
-  padding: 0.6rem;
+  padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
 }
 
 .add-playlist button {
-  background-color: #38598b;
+  background-color: #385170;
   color: white;
   border: none;
-  padding: 0.6rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 6px;
   font-size: 1rem;
   cursor: pointer;
@@ -50,30 +43,28 @@
 }
 
 .add-playlist button:hover {
-  background-color: #1a2b50;
+  background-color: #005fa3;
 }
 
-.clear-btn {
-  background-color: #c0392b;
-}
-
-.clear-btn:hover {
-  background-color: #a93226;
+.playlist-manager ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .playlist-item {
-  background-color: #bbe4e9;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 1.2rem;
-  margin-bottom: 0.7rem;
-  border-radius: 8px;
-  transition: background-color 0.2s ease;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+  background-color: #bbe4e9;
+  transition: background 0.2s ease-in-out;
 }
 
 .playlist-item:hover {
-  background-color: #d9f2f3;
+  background-color: #e5e5e5;
 }
 
 .playlist-name {
@@ -83,20 +74,14 @@
 
 .playlist-count {
   font-size: 0.9rem;
-  color: #555;
+  color: #777;
+  margin-right: 1rem;
 }
 
 .playlist-item button {
-  background-color: #38598b;
-  color: white;
+  background: none;
   border: none;
-  border-radius: 6px;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.9rem;
+  color: red;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.playlist-item button:hover {
-  background-color: #1a2b50;
 }
