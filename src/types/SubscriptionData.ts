@@ -1,7 +1,8 @@
-export type Subscription = {
-  id: number;
-  service: string;
-  planType: string;
+export interface Subscription {
+  id: string;
+  name: string;
+  plan: string;
   price: number;
-};
-
+  validity: string;
+  isActive: boolean;
+}
