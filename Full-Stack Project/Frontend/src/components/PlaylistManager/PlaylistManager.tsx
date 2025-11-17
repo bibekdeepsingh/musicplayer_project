@@ -1,33 +1,44 @@
+import { useEffect, useState } from "react";
 import "./PlaylistManager.css";
+import { PlaylistRepository } from "../../repo/PlaylistRepository";
 import type { Playlist } from "../../types/PlaylistData";
-import { PLAYLISTS_TESTDATA } from "../../data/PlaylistData";
-import { useState, useEffect } from "react";
 
 export function PlaylistManager() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [newName, setNewName] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const saved = localStorage.getItem("playlists");
-    setPlaylists(saved ? JSON.parse(saved) : PLAYLISTS_TESTDATA);
-  }, []);
-
-  const save = (data: Playlist[]) => {
+  const load = async () => {
+    setLoading(true);
+    const data = await PlaylistRepository.all();
     setPlaylists(data);
-    localStorage.setItem("playlists", JSON.stringify(data));
+    setLoading(false);
   };
 
-  const add = () => {
-    if (!newName.trim()) return;
-    save([...playlists, { id: playlists.length + 1, name: newName, songCount: 0 }]);
+  useEffect(() => {
+    load();
+  }, []);
+
+  const add = async () => {
+    const trimmed = newName.trim();
+    if (!trimmed) return;
+
+    const created = await PlaylistRepository.add(trimmed, 0);
+    setPlaylists((prev) => [...prev, created]);
     setNewName("");
   };
 
-  const remove = (id: number) => save(playlists.filter((p) => p.id !== id));
+  const remove = async (id: number) => {
+    await PlaylistRepository.remove(id);
+    setPlaylists((prev) => prev.filter((p) => p.id !== id));
+  };
+
+  if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
 
   return (
     <section className="playlist-manager">
       <h2>My Playlists</h2>
+
       <div className="add-playlist">
         <input
           value={newName}
@@ -36,14 +47,17 @@ export function PlaylistManager() {
         />
         <button onClick={add}>Add</button>
       </div>
+
       {playlists.length === 0 ? (
         <p>No playlists yet.</p>
       ) : (
         <ul>
           {playlists.map((p) => (
             <li key={p.id} className="playlist-item">
-              <span>{p.name}</span>
-              <span>{p.songCount} songs</span>
+              <div>
+                <span className="playlist-name">{p.name}</span>
+                <span className="playlist-count">{p.songCount} songs</span>
+              </div>
               <button onClick={() => remove(p.id)}>Remove</button>
             </li>
           ))}

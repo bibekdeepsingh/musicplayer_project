@@ -1,34 +1,25 @@
-import type { Playlist } from "../types/PlaylistData";
+const BASE = "http://localhost:3000/api/v1/playlists";
 
-const KEY = "playlists";
-const SEED: Playlist[] = [
-  { id: 1, name: "Your Station", songCount: 215 },
-  { id: 2, name: "Hip-Hop Workout", songCount: 212 },
-  { id: 3, name: "Sad Hits", songCount: 140 },
-];
-
-function read(): Playlist[] {
-  const raw = localStorage.getItem(KEY);
-  if (!raw) {
-    localStorage.setItem(KEY, JSON.stringify(SEED));
-    return SEED;
-  }
-  try { return JSON.parse(raw) as Playlist[]; } catch { return SEED; }
-}
-function write(data: Playlist[]) { localStorage.setItem(KEY, JSON.stringify(data)); }
-
-export const playlistRepo = {
-  all(): Playlist[] { return read(); },
-  add(name: string): Playlist[] {
-    const data = read();
-    const next = { id: data.length ? Math.max(...data.map(p => p.id)) + 1 : 1, name: name.trim(), songCount: 0 };
-    const out = [...data, next];
-    write(out);
-    return out;
+export const PlaylistRepository = {
+  async all() {
+    const r = await fetch(BASE);
+    if (!r.ok) throw new Error("Could not load playlists");
+    return r.json();
   },
-  remove(id: number): Playlist[] {
-    const out = read().filter(p => p.id !== id);
-    write(out);
-    return out;
+
+  async add(name: string, songCount = 0) {
+    const r = await fetch(BASE, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, songCount })
+    });
+    if (!r.ok) throw new Error("Could not create playlist");
+    return r.json();
+  },
+
+  async remove(id: number) {
+    const r = await fetch(`${BASE}/${id}`, { method: "DELETE" });
+    if (!r.ok) throw new Error("Could not delete playlist");
+    return r.json();
   }
 };
