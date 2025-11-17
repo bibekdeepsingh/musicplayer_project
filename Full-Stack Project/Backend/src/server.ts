@@ -1,22 +1,16 @@
 import express from "express";
 import cors from "cors";
+import playlistRoutes from "./api/v1/routes/playlist.routes";
 
 const app = express();
+const PORT = 3000;
 
-// Allow only your frontend to access the backend
-app.use(
-  cors({
-    origin: "http://localhost:5173",  // Vite front-end URL
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true,
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 
-// Example route
-app.get("/", (req, res) => {
-  res.json({ message: "API Working" });
-});
+// ROUTES
+app.use("/api/v1/playlists", playlistRoutes);
 
-app.listen(3000, () => console.log("Backend running on port 3000"));
+app.get("/test", (req, res) => res.send("Server OK"));
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
