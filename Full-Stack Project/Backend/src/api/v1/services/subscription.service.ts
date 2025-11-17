@@ -1,4 +1,4 @@
-import * as subscriptionRepo from "../repo/subscription.repo";
+import * as subscriptionRepo from "../repositories/subscription.repo";
 import type { SubscriptionInput } from "../middleware/subscription.schema";
 
 export const create = (data: SubscriptionInput) => {
