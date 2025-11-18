@@ -10,9 +10,15 @@ export function PlaylistManager() {
 
   const load = async () => {
     setLoading(true);
-    const data = await PlaylistRepository.all();
-    setPlaylists(data);
-    setLoading(false);
+    try {
+      const data = await PlaylistRepository.all();
+      setPlaylists(data);
+    } catch (error) {
+      console.error("Failed to load playlists:", error);
+      alert("Failed to connect to backend. Check if server is running on http://localhost:3000");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -23,14 +29,24 @@ export function PlaylistManager() {
     const trimmed = newName.trim();
     if (!trimmed) return;
 
-    const created = await PlaylistRepository.add(trimmed, 0);
-    setPlaylists((prev) => [...prev, created]);
-    setNewName("");
+    try {
+      const created = await PlaylistRepository.add(trimmed, 0);
+      setPlaylists((prev) => [...prev, created]);
+      setNewName("");
+    } catch (error) {
+      console.error("Failed to add playlist:", error);
+      alert("Failed to add playlist. Check backend connection.");
+    }
   };
 
-  const remove = async (id: number) => {
-    await PlaylistRepository.remove(id);
-    setPlaylists((prev) => prev.filter((p) => p.id !== id));
+  const remove = async (id: string) => {  // Changed from number to string
+    try {
+      await PlaylistRepository.remove(id);
+      setPlaylists((prev) => prev.filter((p) => p.id !== id));
+    } catch (error) {
+      console.error("Failed to remove playlist:", error);
+      alert("Failed to remove playlist. Check backend connection.");
+    }
   };
 
   if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
