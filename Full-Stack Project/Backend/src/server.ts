@@ -1,14 +1,23 @@
-// server.ts
-import "dotenv/config";
-import http from "http";
-import app from "./app";
+import express from "express";
+import cors from "cors";
+import playlistRoutes from "./api/v1/routes/playlist.routes";
+import subscriptionRoutes from "./api/v1/routes/subscription.routes";
+import nowPlayingRoutes from "./api/v1/routes/nowPlaying.routes";
 
-const PORT = process.env.PORT || 4000;
+const app = express();
+const PORT = 3000;
 
-const server = http.createServer(app);
+// Middleware
+app.use(cors({ origin: "http://localhost:5173" }));
+app.use(express.json());
 
-server.listen(PORT, () => {
-  console.log(`Backend running at http://localhost:${PORT}`);
-});
+// Routes
+app.use("/api/v1/playlists", playlistRoutes);
+app.use("/api/v1/subscriptions", subscriptionRoutes);
+app.use("/api/v1/now-playing", nowPlayingRoutes);
 
-export default server;
+// Health check
+app.get("/", (req, res) => res.send("Backend is running"));
+app.get("/test", (req, res) => res.send("Server OK"));
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

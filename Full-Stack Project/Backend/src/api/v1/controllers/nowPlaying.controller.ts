@@ -6,7 +6,7 @@ import {
 
 export async function getNowPlaying(req: Request, res: Response) {
   const track = await getNowPlayingService();
-  return res.json(track ?? { title: "", artist: "" });
+  return res.json(track ?? { songName: "", artist: "" });
 }
 
 export async function updateNowPlaying(req: Request, res: Response) {
