@@ -1,4 +1,4 @@
-import { SongRepository } from "../repo/songRepository";
+import { SongRepository } from "../repository/songRepository";
 import type { Song } from "../types/Song";
 
 export const MusicService = {

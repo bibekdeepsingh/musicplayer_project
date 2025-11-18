@@ -1,5 +1,5 @@
 import type { Playlist } from "../types/PlaylistData";
-import { playlistRepo } from "../repo/PlaylistRepository";
+import { playlistRepo } from "../repository/PlaylistRepository";
 
 export const playlistService = {
   getAll(): Playlist[] {
