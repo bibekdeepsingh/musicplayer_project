@@ -15,7 +15,7 @@ export function PlaylistManager() {
       setPlaylists(data);
     } catch (error) {
       console.error("Failed to load playlists:", error);
-      alert("Failed to connect to backend. Check if server is running on http://localhost:4000");
+      alert("Failed to connect to backend. Check if server is running on http://localhost:3000");
     } finally {
       setLoading(false);
     }
