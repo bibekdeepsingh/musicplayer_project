@@ -1,16 +1,14 @@
-import express from "express";
-import cors from "cors";
-import playlistRoutes from "./api/v1/routes/playlist.routes";
+// server.ts
+import "dotenv/config";
+import http from "http";
+import app from "./app";
 
-const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 4000;
 
-app.use(cors());
-app.use(express.json());
+const server = http.createServer(app);
 
-// ROUTES
-app.use("/api/v1/playlists", playlistRoutes);
+server.listen(PORT, () => {
+  console.log(`Backend running at http://localhost:${PORT}`);
+});
 
-app.get("/test", (req, res) => res.send("Server OK"));
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+export default server;
