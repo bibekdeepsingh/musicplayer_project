@@ -1,65 +1,46 @@
-import { testSubscriptions } from "../data/SubscriptionData";
+// Updated to use backend API instead of localStorage (Sprint 4 requirement I.3)
 
 export interface Subscription {
-  id: number;
-  plan: string;
+  id: string;  // Changed to string for UUID from backend
+  service: string;  // Changed from 'plan' to match backend schema
+  planType: string;
   price: number;
-  status: "active" | "inactive";
-  startDate: string;
+  createdAt?: string;  // Backend returns this
 }
 
-const KEY = "subscriptions";
-
-const SEED: Subscription[] = [
-  { id: 1, plan: "Basic Plan", price: 5.99, status: "active", startDate: new Date().toISOString() },
-  { id: 2, plan: "Premium Plan", price: 9.99, status: "inactive", startDate: new Date().toISOString() },
-];
-
-function read(): Subscription[] {
-  const raw = localStorage.getItem(KEY);
-  if (!raw) {
-    localStorage.setItem(KEY, JSON.stringify(SEED));
-    return SEED;
-  }
-  try {
-    return JSON.parse(raw) as Subscription[];
-  } catch {
-    return SEED;
-  }
-}
-
-function write(data: Subscription[]) {
-  localStorage.setItem(KEY, JSON.stringify(data));
-}
+const BASE = "http://localhost:3000/api/v1/subscriptions";
 
 export const subscriptionRepo = {
-  all(): Subscription[] {
-    return read();
+  async all(): Promise<Subscription[]> {
+    const response = await fetch(BASE);
+    if (!response.ok) throw new Error("Failed to load subscriptions");
+    return response.json();
   },
 
-  add(plan: string, price: number): Subscription[] {
-    const data = read();
-    const next: Subscription = {
-      id: data.length ? Math.max(...data.map(s => s.id)) + 1 : 1,
-      plan: plan.trim(),
-      price,
-      status: "active",
-      startDate: new Date().toISOString(),
-    };
-    const out = [...data, next];
-    write(out);
-    return out;
+  async add(service: string, planType: string, price: number): Promise<Subscription> {
+    const response = await fetch(BASE, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ service, planType, price })
+    });
+    if (!response.ok) throw new Error("Failed to create subscription");
+    return response.json();
   },
 
-  remove(id: number): Subscription[] {
-    const out = read().filter(s => s.id !== id);
-    write(out);
-    return out;
+  async remove(id: string): Promise<void> {
+    const response = await fetch(`${BASE}/${id}`, {
+      method: "DELETE"
+    });
+    if (!response.ok) throw new Error("Failed to delete subscription");
   },
 
-  updateStatus(id: number, status: "active" | "inactive"): Subscription[] {
-    const data = read().map(s => (s.id === id ? { ...s, status } : s));
-    write(data);
-    return data;
+  async updateStatus(id: string, planType: string): Promise<Subscription> {
+    const response = await fetch(`${BASE}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ planType })
+    });
+    if (!response.ok) throw new Error("Failed to update subscription");
+    return response.json();
   },
 };
