@@ -1,4 +1,4 @@
-import { subscriptionRepo } from "../repo/SubscriptionRepository";
+import { subscriptionRepo } from "../repository/SubscriptionRepository";
 
 export const subscriptionService = {
   async fetchAll() {

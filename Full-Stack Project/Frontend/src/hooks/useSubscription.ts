@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { subscriptionRepo, type Subscription } from "../repo/SubscriptionRepository";
+import { subscriptionRepo, type Subscription } from "../repository/SubscriptionRepository";
 
 export function useSubscriptionManager() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
