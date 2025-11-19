@@ -17,7 +17,7 @@ export const playlistController = {
   },
 
   async remove(req: Request, res: Response) {
-    const id = req.params.id; // string UUID
+    const id = req.params.id;
     const playlist = await playlistService.remove(id);
     res.json({ message: "Deleted", playlist });
   }
