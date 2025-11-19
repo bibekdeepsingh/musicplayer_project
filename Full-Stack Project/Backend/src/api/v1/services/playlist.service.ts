@@ -1,11 +1,11 @@
 import { prisma } from "../../../lib/prisma";
 
-// TODO: Replace with actual authenticated user ID from session/token
+
 const TEMP_USER_ID = "temp-user-id";
 
 export const playlistService = {
   getAll() {
-    // For now, get all playlists. Later, filter by authenticated user
+    
     return prisma.playlist.findMany();
   },
 
