@@ -1,10 +1,9 @@
 import { prisma } from "../../../lib/prisma";
 
-// TODO: Replace with actual authenticated user ID from session/token
 const TEMP_USER_ID = "temp-user-id";
 
 export async function getNowPlayingService() {
-  // First, ensure a temp user exists for testing
+
   let user = await prisma.user.findUnique({ where: { id: TEMP_USER_ID } });
   
   if (!user) {
@@ -22,9 +21,9 @@ export async function getNowPlayingService() {
   if (!record) {
     record = await prisma.nowPlaying.create({
       data: {
-        songName: "No Song Playing",  // Changed from 'title' to 'songName'
+        songName: "No Song Playing",  '
         artist: "Unknown Artist",
-        userId: TEMP_USER_ID  // Required field!
+        userId: TEMP_USER_ID
       },
     });
   }
