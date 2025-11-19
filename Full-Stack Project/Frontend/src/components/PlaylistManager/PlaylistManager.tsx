@@ -8,7 +8,7 @@ export function PlaylistManager() {
   const [loading, setLoading] = useState(true);
   const [newName, setNewName] = useState("");
 
-  // Load playlists on mount
+
   useEffect(() => {
     const load = async () => {
       setLoading(true);
@@ -26,7 +26,7 @@ export function PlaylistManager() {
     load();
   }, []);
 
-  // Add playlist
+
   const addPlaylist = async () => {
     if (!newName.trim()) return;
 
@@ -40,7 +40,6 @@ export function PlaylistManager() {
     }
   };
 
-  // Remove playlist
   const removePlaylist = async (id: number | string) => {
     try {
       await playlistRepository.remove(id);
