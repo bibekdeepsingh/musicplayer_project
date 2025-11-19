@@ -1,16 +1,13 @@
 import { prisma } from "../../../lib/prisma";
 
-// TODO: Replace with actual authenticated user ID from session/token
 const TEMP_USER_ID = "temp-user-id";
 
 export const playlistService = {
   getAll() {
-    // For now, get all playlists. Later, filter by authenticated user
     return prisma.playlist.findMany();
   },
 
   async create(name: string) {
-    // First, ensure a temp user exists for testing
     let user = await prisma.user.findUnique({ where: { id: TEMP_USER_ID } });
     
     if (!user) {
@@ -27,7 +24,7 @@ export const playlistService = {
       data: { 
         name, 
         songCount: 0,
-        userId: TEMP_USER_ID  // Required field!
+        userId: TEMP_USER_ID  
       }
     });
   },
