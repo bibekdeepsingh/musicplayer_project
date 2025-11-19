@@ -5,7 +5,6 @@ const app = express();
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
-// In-memory storage with test data
 let playlists = [
   { id: "1",  name: "Your Station",     songCount: 215 },
   { id: "2",  name: "Hip-Hop Workout",  songCount: 212 },
@@ -18,7 +17,6 @@ let playlists = [
   { id: "9",  name: "Party Starters",   songCount: 65 },
 ];
 
-// GET all playlists
 app.get('/api/v1/playlists', (req, res) => {
   console.log('GET /api/v1/playlists called');
   res.json(playlists);
@@ -46,6 +44,6 @@ app.get('/', (req, res) => res.send('Test server OK'));
 
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Test server running on http://localhost:${PORT}`);
-  console.log(`✅ Test it: http://localhost:${PORT}/api/v1/playlists`);
+  console.log(`Test server running on http://localhost:${PORT}`);
+  console.log(`Test it: http://localhost:${PORT}/api/v1/playlists`);
 });
