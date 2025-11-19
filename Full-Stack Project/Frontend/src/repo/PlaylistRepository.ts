@@ -17,7 +17,7 @@ export const PlaylistRepository = {
     return r.json();
   },
 
-  async remove(id: number) {
+  async remove(id: string) {  
     const r = await fetch(`${BASE}/${id}`, { method: "DELETE" });
     if (!r.ok) throw new Error("Could not delete playlist");
     return r.json();

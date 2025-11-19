@@ -10,6 +10,10 @@ const corsOptions: CorsOptions = {
       callback(new Error("Not allowed by CORS restriction"), false);
     }
   },
+<<<<<<< HEAD
+=======
+  
+>>>>>>> cfdabaebd685b87a703514425d9c2efe9792515e
   allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS"],
   credentials: true,
