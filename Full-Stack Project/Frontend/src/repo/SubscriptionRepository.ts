@@ -1,65 +1,57 @@
-import { testSubscriptions } from "../data/SubscriptionData";
-
 export interface Subscription {
-  id: number;
-  plan: string;
+  id: string;
+  service: string;
+  planType: string;
   price: number;
-  status: "active" | "inactive";
-  startDate: string;
+  createdAt?: string;
 }
 
-const KEY = "subscriptions";
-
-const SEED: Subscription[] = [
-  { id: 1, plan: "Basic Plan", price: 5.99, status: "active", startDate: new Date().toISOString() },
-  { id: 2, plan: "Premium Plan", price: 9.99, status: "inactive", startDate: new Date().toISOString() },
-];
-
-function read(): Subscription[] {
-  const raw = localStorage.getItem(KEY);
-  if (!raw) {
-    localStorage.setItem(KEY, JSON.stringify(SEED));
-    return SEED;
-  }
-  try {
-    return JSON.parse(raw) as Subscription[];
-  } catch {
-    return SEED;
-  }
-}
-
-function write(data: Subscription[]) {
-  localStorage.setItem(KEY, JSON.stringify(data));
-}
+const BASE_URL = "http://localhost:3000/api/v1/subscriptions";
 
 export const subscriptionRepo = {
-  all(): Subscription[] {
-    return read();
+  async all(): Promise<Subscription[]> {
+    const res = await fetch(BASE_URL);
+    if (!res.ok) {
+      throw new Error("Failed to load subscriptions");
+    }
+    return res.json();
   },
 
-  add(plan: string, price: number): Subscription[] {
-    const data = read();
-    const next: Subscription = {
-      id: data.length ? Math.max(...data.map(s => s.id)) + 1 : 1,
-      plan: plan.trim(),
-      price,
-      status: "active",
-      startDate: new Date().toISOString(),
-    };
-    const out = [...data, next];
-    write(out);
-    return out;
+  async add(service: string, planType: string, price: number): Promise<Subscription> {
+    const res = await fetch(BASE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ service, planType, price }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to create subscription");
+    }
+
+    return res.json();
   },
 
-  remove(id: number): Subscription[] {
-    const out = read().filter(s => s.id !== id);
-    write(out);
-    return out;
+  async remove(id: string): Promise<void> {
+    const res = await fetch(`${BASE_URL}/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to delete subscription");
+    }
   },
 
-  updateStatus(id: number, status: "active" | "inactive"): Subscription[] {
-    const data = read().map(s => (s.id === id ? { ...s, status } : s));
-    write(data);
-    return data;
+  async updateStatus(id: string, planType: string): Promise<Subscription> {
+    const res = await fetch(`${BASE_URL}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ planType }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to update subscription");
+    }
+
+    return res.json();
   },
 };
