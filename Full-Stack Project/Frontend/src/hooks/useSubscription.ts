@@ -1,30 +1,39 @@
 import { useEffect, useState } from "react";
-import { subscriptionRepo, type Subscription } from "../repo/SubscriptionRepository";
+import type { Subscription } from "../repository/SubscriptionRepository";
+import { subscriptionService } from "../services/SubscriptionService";
 
 export function useSubscriptionManager() {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 
   useEffect(() => {
-    setSubscriptions(subscriptionRepo.all());
+    async function load() {
+      const data = await subscriptionService.fetchAll();
+      setSubscriptions(data);
+    }
+    load();
   }, []);
 
-  function addSubscription(plan: string, price: number) {
-    const updated = subscriptionRepo.add(plan, price);
-    setSubscriptions(updated);
+  async function addSubscription(service: string, planType: string, price: number) {
+    const newSub = await subscriptionService.add(service, planType, price);
+    setSubscriptions((prev) => [...prev, newSub]);
   }
 
-  function removeSubscription(id: number) {
-    const updated = subscriptionRepo.remove(id);
-    setSubscriptions(updated);
+  async function removeSubscription(id: string) {
+    await subscriptionService.remove(id);
+    setSubscriptions((prev) => prev.filter((sub) => sub.id !== id));
   }
 
-  function toggleStatus(id: number) {
-    const sub = subscriptions.find(s => s.id === id);
-    if (!sub) return;
-    const newStatus = sub.status === "active" ? "inactive" : "active";
-    const updated = subscriptionRepo.updateStatus(id, newStatus);
-    setSubscriptions(updated);
+  async function updatePlan(id: string, planType: string) {
+    const updated = await subscriptionService.updatePlan(id, planType);
+    setSubscriptions((prev) =>
+      prev.map((sub) => (sub.id === id ? updated : sub))
+    );
   }
 
-  return { subscriptions, addSubscription, removeSubscription, toggleStatus };
+  return {
+    subscriptions,
+    addSubscription,
+    removeSubscription,
+    updatePlan
+  };
 }

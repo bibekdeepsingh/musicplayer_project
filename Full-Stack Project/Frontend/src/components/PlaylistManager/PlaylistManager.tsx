@@ -39,7 +39,7 @@ export function PlaylistManager() {
     }
   };
 
-  const remove = async (id: string) => {  // Changed from number to string
+  const remove = async (id: string) => { 
     try {
       await PlaylistRepository.remove(id);
       setPlaylists((prev) => prev.filter((p) => p.id !== id));

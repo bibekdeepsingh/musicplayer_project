@@ -1,5 +1,5 @@
 export interface Playlist {
-  id: number;
+  id: string;  // Changed from number to string (UUID from backend)
   name: string;
   songCount: number;
 }
