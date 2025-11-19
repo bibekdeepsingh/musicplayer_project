@@ -1,37 +1,36 @@
 import { useEffect, useState } from "react";
-import type { Playlist } from "../../types/PlaylistData";
-import { playlistRepository } from "../../repository/PlaylistRepository";
 import "./PlaylistManager.css";
+import { PlaylistRepository } from "../../repo/PlaylistRepository";
+import type { Playlist } from "../../types/PlaylistData";
 
 export function PlaylistManager() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
-  const [loading, setLoading] = useState(true);
   const [newName, setNewName] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  // Load playlists on mount
+  const load = async () => {
+    setLoading(true);
+    try {
+      const data = await PlaylistRepository.all();
+      setPlaylists(data);
+    } catch (error) {
+      console.error("Failed to load playlists:", error);
+      alert("Failed to connect to backend. Check if server is running on http://localhost:3000");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const load = async () => {
-      setLoading(true);
-      try {
-        const data = await playlistRepository.getAll();
-        setPlaylists(data);
-      } catch (error) {
-        console.error("Failed to load playlists:", error);
-        alert("Failed to connect to backend. Make sure server is running.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     load();
   }, []);
 
-  // Add playlist
-  const addPlaylist = async () => {
-    if (!newName.trim()) return;
+  const add = async () => {
+    const trimmed = newName.trim();
+    if (!trimmed) return;
 
     try {
-      const created = await playlistRepository.add(newName.trim());
+      const created = await PlaylistRepository.add(trimmed, 0);
       setPlaylists((prev) => [...prev, created]);
       setNewName("");
     } catch (error) {
@@ -40,10 +39,9 @@ export function PlaylistManager() {
     }
   };
 
-  // Remove playlist
-  const removePlaylist = async (id: number | string) => {
+  const remove = async (id: string) => { 
     try {
-      await playlistRepository.remove(id);
+      await PlaylistRepository.remove(id);
       setPlaylists((prev) => prev.filter((p) => p.id !== id));
     } catch (error) {
       console.error("Failed to remove playlist:", error);
@@ -51,7 +49,7 @@ export function PlaylistManager() {
     }
   };
 
-  if (loading) return <p>Loading playlists...</p>;
+  if (loading) return <p style={{ textAlign: "center" }}>Loading...</p>;
 
   return (
     <section className="playlist-manager">
@@ -63,7 +61,7 @@ export function PlaylistManager() {
           onChange={(e) => setNewName(e.target.value)}
           placeholder="New playlist name"
         />
-        <button onClick={addPlaylist}>Add</button>
+        <button onClick={add}>Add</button>
       </div>
 
       {playlists.length === 0 ? (
@@ -72,9 +70,11 @@ export function PlaylistManager() {
         <ul>
           {playlists.map((p) => (
             <li key={p.id} className="playlist-item">
-              <span>{p.name}</span>
-              <span>{p.songCount} songs</span>
-              <button onClick={() => removePlaylist(p.id)}>Remove</button>
+              <div>
+                <span className="playlist-name">{p.name}</span>
+                <span className="playlist-count">{p.songCount} songs</span>
+              </div>
+              <button onClick={() => remove(p.id)}>Remove</button>
             </li>
           ))}
         </ul>
