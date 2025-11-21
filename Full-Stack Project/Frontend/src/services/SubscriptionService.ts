@@ -2,27 +2,18 @@ import { subscriptionRepo } from "../repository/SubscriptionRepository";
 
 export const subscriptionService = {
   async fetchAll() {
-    return new Promise(resolve => {
-      setTimeout(() => resolve(subscriptionRepo.all()), 300);
-    });
+    return subscriptionRepo.all();
   },
-  async add(plan: string, price: number) {
-    return new Promise(resolve => {
-      setTimeout(() => resolve(subscriptionRepo.add(plan, price)), 300);
-    });
+
+  async add(service: string, planType: string, price: number) {
+    return subscriptionRepo.add(service, planType, price);
   },
-  async remove(id: number) {
-    return new Promise(resolve => {
-      setTimeout(() => resolve(subscriptionRepo.remove(id)), 300);
-    });
+
+  async remove(id: string) {
+    return subscriptionRepo.remove(id);
   },
-  async toggleStatus(id: number) {
-    return new Promise(resolve => {
-      const data = subscriptionRepo.all();
-      const sub = data.find(s => s.id === id);
-      if (!sub) return resolve(data);
-      const newStatus = sub.status === "active" ? "inactive" : "active";
-      setTimeout(() => resolve(subscriptionRepo.updateStatus(id, newStatus)), 300);
-    });
-  },
+
+  async updatePlan(id: string, planType: string) {
+    return subscriptionRepo.updateStatus(id, planType);
+  }
 };
