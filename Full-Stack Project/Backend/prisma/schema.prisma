@@ -12,40 +12,48 @@ datasource db {
 
 
 model User {
-  id             String        @id @default(uuid())
-  email          String        @unique
-  password       String
-  createdAt      DateTime      @default(now())
-  playlists      Playlist[]
-  subscriptions  Subscription[]
-  nowPlaying     NowPlaying?
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  createdAt     DateTime       @default(now())
+  playlists     Playlist[]
+  subscriptions Subscription[]
+  nowPlaying    NowPlaying?
 }
 
 model Playlist {
-  id          String      @id @default(uuid())
-  name        String
-  songCount   Int         @default(0)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  userId      String
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid())
+  name      String
+  songCount Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Subscription {
-  id          String      @id @default(uuid())
-  service     String
-  planType    String
-  price       Float
-  createdAt   DateTime    @default(now())
-  userId      String
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid())
+  service   String
+  planType  String
+  price     Float
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model NowPlaying {
-  id          String      @id @default(uuid())
-  songName    String
-  artist      String
-  timestamp   DateTime    @default(now())
-  userId      String      @unique
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(uuid())
+  songName  String
+  artist    String
+  timestamp DateTime @default(now())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Song {
+  id        String   @id @default(uuid())
+  title     String
+  artist    String
+  duration  String
+  createdAt DateTime @default(now())
 }
