@@ -1,38 +1,36 @@
 import { prisma } from "../../../lib/prisma";
 
-
-const TEMP_USER_ID = "temp-user-id";
-
 export const playlistService = {
-  getAll() {
-    
-    return prisma.playlist.findMany();
+  getAll(userId: string | null | undefined) {
+    if (!userId) return [];
+    return prisma.playlist.findMany({
+      where: { userId }
+    });
   },
 
-  async create(name: string) {
-    
-    let user = await prisma.user.findUnique({ where: { id: TEMP_USER_ID } });
-    
-    if (!user) {
-      user = await prisma.user.create({
-        data: {
-          id: TEMP_USER_ID,
-          email: "temp@example.com",
-          password: "temp-password"
-        }
-      });
-    }
+  async create(userId: string | null | undefined, name: string) {
+    if (!userId) return null;
 
     return prisma.playlist.create({
-      data: { 
-        name, 
+      data: {
+        name,
         songCount: 0,
-        userId: TEMP_USER_ID  
+        userId
       }
     });
   },
 
-  remove(id: string) {
-    return prisma.playlist.delete({ where: { id } });
+  async remove(userId: string | null | undefined, id: string) {
+    if (!userId) return null;
+
+    const playlist = await prisma.playlist.findUnique({
+      where: { id }
+    });
+
+    if (!playlist || playlist.userId !== userId) return null;
+
+    return prisma.playlist.delete({
+      where: { id }
+    });
   }
 };
