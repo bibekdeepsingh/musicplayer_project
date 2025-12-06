@@ -1,26 +1,49 @@
-/* 
-Colour Palette:
-- Navy Blue (Header): #1a2b50
-- White (Text): #ffffff
-*/
 .app-header {
   background-color: #142d4c; 
   color: #ffffff;
   padding: 1.5rem 2rem;
-  text-align: left;          
-  width: 83vw;              
-  box-sizing: border-box;   
-  margin: 0;
+  width: 83vw;
+  box-sizing: border-box;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .app-header h1 {
   margin: 0;
   font-size: 2rem;
-  text-align: center;          
 }
 
 .app-header p {
-  margin: 0.5rem 0 0;
+  margin: 0.5rem 0 1rem;
   font-size: 1rem;
-  text-align: center;         
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.auth-buttons a {
+  text-decoration: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 2px solid white;
+  color: white;
+}
+
+.signup-btn {
+  background-color: #142d4c;
+  color: white;
+}
+
+.signup-btn:hover {
+  background-color: #e6e6e6;
+}
+
+.auth-buttons a:hover {
+  opacity: 0.85;
 }

@@ -18,10 +18,12 @@ export const subscriptionRepo = {
   },
 
   async add(service: string, planType: string, price: number): Promise<Subscription> {
+    const payload = { service, planType, price };
+
     const res = await fetch(BASE_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ service, planType, price }),
+      body: JSON.stringify(payload),
     });
 
     if (!res.ok) {
@@ -39,19 +41,5 @@ export const subscriptionRepo = {
     if (!res.ok) {
       throw new Error("Failed to delete subscription");
     }
-  },
-
-  async updateStatus(id: string, planType: string): Promise<Subscription> {
-    const res = await fetch(`${BASE_URL}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ planType }),
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to update subscription");
-    }
-
-    return res.json();
-  },
+  }
 };
