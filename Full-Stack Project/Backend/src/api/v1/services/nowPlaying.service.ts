@@ -21,7 +21,7 @@ export async function getNowPlayingService() {
   if (!record) {
     record = await prisma.nowPlaying.create({
       data: {
-        songName: "No Song Playing",  '
+        songName: "No Song Playing",  
         artist: "Unknown Artist",
         userId: TEMP_USER_ID
       },
@@ -31,7 +31,7 @@ export async function getNowPlayingService() {
   return record;
 }
 
-export async function updateNowPlayingService(data: { songName: string; artist: string }) {  // Changed 'title' to 'songName'
+export async function updateNowPlayingService(data: { songName: string; artist: string }) {  
   const existing = await prisma.nowPlaying.findFirst();
 
   const updated = await prisma.nowPlaying.update({
