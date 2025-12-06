@@ -1,54 +1,43 @@
 import { prisma } from "../../../lib/prisma";
 
-const TEMP_USER_ID = "temp-user-id";
-
-export async function getNowPlayingService() {
-  let user = await prisma.user.findUnique({ where: { id: TEMP_USER_ID } });
-
-  if (!user) {
-    user = await prisma.user.create({
-      data: {
-        id: TEMP_USER_ID,
-        email: "temp@example.com",
-        password: "temp-password",
-      },
-    });
-  }
+export async function getNowPlayingService(userId: string | null | undefined) {
+  if (!userId) return null;
 
   let record = await prisma.nowPlaying.findFirst({
-    where: { userId: TEMP_USER_ID }
+    where: { userId }
   });
 
-if (!record) {
-  record = await prisma.nowPlaying.create({
-    data: {
-      songName: "Shape of You",
-      artist: "Ed Sheeran",
-      userId: TEMP_USER_ID
-    }
-  });
-}
+  if (!record) {
+    record = await prisma.nowPlaying.create({
+      data: {
+        songName: "No Song Playing",
+        artist: "Unknown Artist",
+        userId
+      }
+    });
+  }
 
   return record;
 }
 
-export async function updateNowPlayingService(data: { songName: string; artist: string }) {
+export async function updateNowPlayingService(
+  userId: string | null | undefined,
+  data: { songName: string; artist: string }
+) {
+  if (!userId) return null;
+
   const existing = await prisma.nowPlaying.findFirst({
-    where: { userId: TEMP_USER_ID }
+    where: { userId }
   });
 
-  if (existing) {
-    return prisma.nowPlaying.update({
-      where: { id: existing.id },
-      data
+  if (!existing) {
+    return prisma.nowPlaying.create({
+      data: { ...data, userId }
     });
   }
 
-  return prisma.nowPlaying.create({
-    data: {
-      songName: data.songName,
-      artist: data.artist,
-      userId: TEMP_USER_ID
-    }
+  return prisma.nowPlaying.update({
+    where: { id: existing.id },
+    data
   });
 }
